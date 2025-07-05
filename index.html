@@ -242,23 +242,20 @@
     </header>
 
     <!-- Modal choosing language -->
-    <div class="">
+    <div x-data="{ showModal: true, activeTab: 'languageRegion' }">
       <!-- Overlay -->
       <div
-        x-show="showModal"
         class="fixed inset-0 z-40 bg-black/40"
+        x-show="showModal"
         @click="showModal = false"
         x-transition
       ></div>
 
-      <!-- Modal -->
+      <!-- Modal box -->
       <div
-        x-show="showModal"
-        x-transition
-        class="fixed left-1/2 top-1/2 z-50 h-[90vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-white p-4 shadow-2xl"
-        @click.outside="showModal = false"
+        class="fixed left-1/2 top-1/2 z-50 flex h-[90vh] max-h-[90vh] w-[70vw] max-w-[70vw] -translate-x-1/2 -translate-y-1/2 flex-col space-y-6 overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl"
       >
-        <!-- Close button -->
+        <!-- Close icon -->
         <button>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -272,9 +269,19 @@
           </svg>
         </button>
 
-        <!-- Tab items -->
+        <!-- Tab buttons -->
+        <div class="flex items-center space-x-6 border-b border-gray-200 pb-3">
+          <div>
+            <button class="text-sm font-normal leading-5">Language & region</button>
+          </div>
+          <div>
+            <button class="text-sm font-normal leading-5">Currency</button>
+          </div>
+        </div>
 
         <!-- Tab content -->
+        <div><p>Content for Language & region</p></div>
+        <div><p>Content Currency</p></div>
       </div>
     </div>
 
