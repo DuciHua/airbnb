@@ -24,9 +24,9 @@
   >
     <!-- Header -->
     <header class="border-b border-gray-100 bg-gray-50 py-4">
-      <div class="container flex flex-col">
+      <div class="container flex flex-col items-center gap-y-8">
         <!-- Top -->
-        <div class="flex items-center justify-between">
+        <div class="container flex items-center justify-between">
           <!-- Logo -->
           <img
             src="./src/assets/icons/airbnb-logo.svg"
@@ -197,33 +197,290 @@
 
         <!-- Bottom -->
         <div>
-          <ul>
-            <li>
-              <button>
-                <p>Where</p>
-                <p>Search destination</p>
+          <ul
+            x-data="{
+              activeDropdown: null,
+              toggleDropdown(name) {
+                this.activeDropdown = this.activeDropdown === name ? null : name
+              }
+            }"
+            class="relative flex items-center rounded-full border border-gray-200 bg-white shadow-lg"
+          >
+            <!-- Where -->
+            <li class="relative">
+              <button
+                @click="activeDropdown = 'where'"
+                :class="activeDropdown === 'where' ? 'pl-10 py-4 pr-10 bg-white ring-1 ring-gray-100 rounded-full shadow-lg' : 'pl-10 py-4 pr-10 bg-white hover:bg-gray-200 rounded-full'"
+              >
+                <p class="text-left text-xs text-black">Where</p>
+                <p class="text-left text-sm text-gray-500">Search destination</p>
               </button>
+              <!-- Dropdown for Where -->
+              <div
+                x-show.immediate="activeDropdown === 'where'"
+                x-transition
+                @click.outside="activeDropdown = null"
+                class="absolute left-0 mt-4 flex w-[26rem] flex-col gap-y-2 overflow-y-auto rounded-3xl bg-white p-7 shadow-2xl"
+              >
+                <p class="text-xs font-normal text-gray-600">Suggested destinations</p>
+                <div class="flex flex-col gap-y-4">
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-blue-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Nearby</p>
+                      <p class="text-sm font-normal text-gray-500">Find what's around you</p>
+                    </div>
+                  </a>
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/navigation.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-blue-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Ho Chi Minh City, Vietnam</p>
+                      <p class="text-sm font-normal text-gray-500">Ho Chi Minh City, Vietnam</p>
+                    </div>
+                  </a>
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/satellite.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-yellow-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Bangkok, Thailand</p>
+                      <p class="text-sm font-normal text-gray-500">For its bustling nightlife</p>
+                    </div>
+                  </a>
+                  <a href="" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/turn.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-violet-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Dalat, Vietnam</p>
+                      <p class="text-sm font-normal text-gray-500">For nature lovers</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </li>
-            <li>
-              <button>
-                <p>Check in</p>
-                <p>Add dates</p>
+            <!-- Checkin -->
+            <li class="relative">
+              <button
+                @click="activeDropdown = 'checkin'"
+                :class="activeDropdown === 'checkin' ? 'pl-10 py-4 pr-10 bg-white ring-1 ring-gray-100 rounded-full shadow-lg' : 'pl-10 py-4 pr-10 bg-white hover:bg-gray-200 rounded-full'"
+              >
+                <p class="text-left text-xs text-black">Check in</p>
+                <p class="text-left text-sm text-gray-500">Add dates</p>
               </button>
+              <!-- Dropdown for Check in -->
+              <div
+                x-show.immediate="activeDropdown === 'checkin'"
+                x-transition
+                @click.outside="activeDropdown = null"
+                class="absolute left-0 mt-4 flex w-[26rem] flex-col gap-y-2 overflow-y-auto rounded-3xl bg-white p-7 shadow-2xl"
+              >
+                <p class="text-xs font-normal text-gray-600">Suggested destinations</p>
+                <div class="flex flex-col gap-y-4">
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-blue-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Nearby</p>
+                      <p class="text-sm font-normal text-gray-500">Find what's around you</p>
+                    </div>
+                  </a>
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-pink-50 p-4"
+                    />
+                    <a href="#">
+                      <p class="text-left text-sm font-medium text-black">
+                        Ho Chi Minh City, Vietnam
+                      </p>
+                      <p class="text-sm font-normal text-gray-500">
+                        For sights like Ben Thanh Market
+                      </p>
+                    </a>
+                  </a>
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-yellow-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Bangkok, Thailand</p>
+                      <p class="text-sm font-normal text-gray-500">For its bustling nightlife</p>
+                    </div>
+                  </a>
+                  <a href="" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-violet-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Dalat, Vietnam</p>
+                      <p class="text-sm font-normal text-gray-500">For nature lovers</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </li>
-            <li>
-              <button>
-                <p>Check out</p>
-                <p>Add dates</p>
+            <!-- Check out -->
+            <li class="relative">
+              <button
+                @click="activeDropdown = 'checkout'"
+                :class="activeDropdown === 'checkout' ? 'pl-10 py-4 pr-10 bg-white ring-1 ring-gray-100 rounded-full shadow-lg' : 'pl-10 py-4 pr-10 bg-white hover:bg-gray-200 rounded-full'"
+              >
+                <p class="text-left text-xs text-black">Check out</p>
+                <p class="text-left text-sm text-gray-500">Add dates</p>
               </button>
+              <!-- Dropdown for Check out -->
+              <div
+                x-show.immediate="activeDropdown === 'checkout'"
+                x-transition
+                @click.outside="activeDropdown = null"
+                class="absolute left-0 mt-4 flex w-[26rem] flex-col gap-y-2 overflow-y-auto rounded-3xl bg-white p-7 shadow-2xl"
+              >
+                <p class="text-xs font-normal text-gray-600">Suggested destinations</p>
+                <div class="flex flex-col gap-y-4">
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-blue-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Nearby</p>
+                      <p class="text-sm font-normal text-gray-500">Find what's around you</p>
+                    </div>
+                  </a>
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-pink-50 p-4"
+                    />
+                    <a href="#">
+                      <p class="text-left text-sm font-medium text-black">
+                        Ho Chi Minh City, Vietnam
+                      </p>
+                      <p class="text-sm font-normal text-gray-500">
+                        For sights like Ben Thanh Market
+                      </p>
+                    </a>
+                  </a>
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-yellow-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Bangkok, Thailand</p>
+                      <p class="text-sm font-normal text-gray-500">For its bustling nightlife</p>
+                    </div>
+                  </a>
+                  <a href="" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-violet-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Dalat, Vietnam</p>
+                      <p class="text-sm font-normal text-gray-500">For nature lovers</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </li>
-            <li>
-              <button>
-                <p>Who</p>
-                <p>Add guests</p>
+            <!-- Who -->
+            <li class="relative">
+              <button
+                @click="activeDropdown = 'who'"
+                :class="activeDropdown === 'who' ? 'pl-10 py-4 pr-[16rem] bg-white ring-1 ring-gray-100 rounded-full shadow-lg' : 'pl-10 py-4 pr-[6rem] bg-white hover:bg-gray-200 rounded-full'"
+              >
+                <p class="text-left text-xs text-black">Where</p>
+                <p class="text-left text-sm text-gray-500">Search destination</p>
               </button>
+              <!-- Dropdown for Who -->
+              <div
+                x-show.immediate="activeDropdown === 'who'"
+                x-transition
+                @click.outside="activeDropdown = null"
+                class="absolute left-0 mt-4 flex w-[26rem] flex-col gap-y-2 overflow-y-auto rounded-3xl bg-white p-7 shadow-2xl"
+              >
+                <p class="text-xs font-normal text-gray-600">Suggested destinations</p>
+                <div class="flex flex-col gap-y-4">
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-blue-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Nearby</p>
+                      <p class="text-sm font-normal text-gray-500">Find what's around you</p>
+                    </div>
+                  </a>
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-pink-50 p-4"
+                    />
+                    <a href="#">
+                      <p class="text-left text-sm font-medium text-black">
+                        Ho Chi Minh City, Vietnam
+                      </p>
+                      <p class="text-sm font-normal text-gray-500">
+                        For sights like Ben Thanh Market
+                      </p>
+                    </a>
+                  </a>
+                  <a href="#" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-yellow-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Bangkok, Thailand</p>
+                      <p class="text-sm font-normal text-gray-500">For its bustling nightlife</p>
+                    </div>
+                  </a>
+                  <a href="" class="flex items-center gap-x-4">
+                    <img
+                      src="./src/assets/icons/map.svg"
+                      alt="This is a map"
+                      class="size-[4rem] rounded-lg bg-violet-50 p-4"
+                    />
+                    <div>
+                      <p class="text-left text-sm font-medium text-black">Dalat, Vietnam</p>
+                      <p class="text-sm font-normal text-gray-500">For nature lovers</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </li>
-            <li>
-              <button>
+            <!-- Search icon -->
+            <li class="absolute right-2">
+              <button class="p-4 bg-pink-200 rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -245,6 +502,7 @@
       </div>
     </header>
 
+    <!-- ========================================================================================== -->
     <!-- Modal choosing language -->
     <div>
       <!-- Overlay -->
@@ -378,15 +636,43 @@
           </div>
 
           <!-- Choose language -->
-          <div x-data="{ activeItem: }" class="flex flex-col space-y-3">
+          <div
+            x-data="{
+              selectedLanguage: null,
+              languages: [
+                { code: 'enUS', label: 'English', country: 'United States' },
+                { code: 'enSing', label: 'English', country: 'Singapore' },
+                { code: 'vietnamese', label: 'Vietnamese', country: 'Vietnam' },
+                { code: 'japanese', label: 'Japanese', country: 'Japan' },
+                { code: 'enIndia', label: 'English', country: 'India' },
+                { code: 'german', label: 'German', country: 'Germany' },
+                { code: 'enAus', label: 'English', country: 'Australia' },
+                { code: 'espanol', label: 'Espanol', country: 'Bolivia' },
+                { code: 'spanish', label: 'Spanish', country: 'Portugal' },
+                { code: 'por', label: 'Portuguese', country: 'Portugal' },
+                { code: 'deutschLux', label: 'Deutsch', country: 'Luxemburg' },
+                { code: 'italian', label: 'Italian', country: 'Italy' },
+              ]
+            }"
+            class="flex flex-col space-y-3"
+          >
             <h3 class="text-xl font-medium leading-8 text-black">Choose a language and region</h3>
-            <div class="grid">
-              <article>
-                <button class="flex flex-col items-start space-y-1 rounded-lg py-3 pl-3 pr-[6rem] hover:bg-gray-100">
-                  <p class="text-xs font-normal leading-3 text-black">English</p>
-                  <p class="text-xs font-normal leading-3 text-gray-500">United State</p>
+            <div class="grid grid-cols-5 gap-4">
+              <template x-for="lang in languages" :key="lang.code">
+                <button
+                  @click="selectedLanguage = lang.code"
+                  :class="selectedLanguage === lang.code ? 'flex flex-col items-start space-y-1 rounded-lg p-3 border border-black' : 'flex flex-col items-start space-y-1 rounded-lg p-3 hover:bg-gray-100 border border-transparent'"
+                >
+                  <p
+                    class="text-left text-xs font-normal leading-3 text-black"
+                    x-text="lang.label"
+                  ></p>
+                  <p
+                    class="text-left text-xs font-normal leading-3 text-gray-500"
+                    x-text="lang.country"
+                  ></p>
                 </button>
-              </article>
+              </template>
             </div>
           </div>
         </div>
