@@ -17,7 +17,11 @@
     <!-- AlpineJS -->
     <script src="//unpkg.com/alpinejs" defer></script>
   </head>
-  <body>
+  <body
+    x-data="{ showModal: false, activeTab: 'languageRegion' }"
+    @open-modal.window="showModal = true"
+    @keydown.escape.window="showModal = false"
+  >
     <!-- Header -->
     <header class="border-b border-gray-100 bg-gray-50 py-4">
       <div class="container flex flex-col">
@@ -80,7 +84,7 @@
             </li>
             <!-- Select Language -->
             <li>
-              <button class="rounded-full bg-gray-100 p-3">
+              <button @click="$dispatch('open-modal')" class="rounded-full bg-gray-100 p-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -242,19 +246,25 @@
     </header>
 
     <!-- Modal choosing language -->
-    <div x-data="{ showModal: true, activeTab: 'languageRegion' }">
+    <div>
       <!-- Overlay -->
       <div
-        class="fixed inset-0 z-40 bg-black/40"
         x-show="showModal"
+        x-transition.opacity.duration.200ms
+        class="fixed inset-0 z-40 bg-black/40"
         @click="showModal = false"
       ></div>
 
       <!-- Modal box -->
       <div
-        class="fixed left-1/2 top-1/2 z-50 h-[90vh] max-h-[90vh] w-[70vw] max-w-[70vw] -translate-x-1/2 -translate-y-1/2 flex-col space-y-10 overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl"
         x-show="showModal"
-        x-transition
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
+        class="fixed left-1/2 top-1/2 z-50 h-[90vh] max-h-[90vh] w-[70vw] max-w-[70vw] -translate-x-1/2 -translate-y-1/2 flex-col space-y-10 overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl"
         @click.outside="showModal = false"
       >
         <!-- Close icon -->
@@ -332,29 +342,51 @@
           </div>
 
           <!-- Suggested languages -->
-          <div class="flex-col space-y-3">
+          <div x-data="{ selected: null }" class="flex-col space-y-3">
             <h3 class="text-xl font-medium leading-8 text-black">
               Suggested languages and regions
             </h3>
-            <div class="flex items-center space-x-5">
-              <button
-                class="flex-col items-start space-y-1 rounded-lg bg-gray-100 py-3 pl-3 pr-[6rem]"
-              >
-                <p class="text-xs font-normal leading-3 text-black">Francais</p>
-                <p class="text-xs font-normal leading-3 text-gray-500">France</p>
-              </button>
-              <button
-                class="flex-col items-start space-y-1 rounded-lg bg-gray-100 py-3 pl-3 pr-[6rem]"
-              >
-                <p class="text-xs font-normal leading-3 text-black">Tiếng Việt</p>
-                <p class="text-xs font-normal leading-3 text-gray-500">Việt Nam</p>
-              </button>
-              <button
-                class="flex-col items-start space-y-1 rounded-lg bg-gray-100 py-3 pl-3 pr-[6rem]"
-              >
-                <p class="text-xs font-normal leading-3 text-black">English</p>
-                <p class="text-xs font-normal leading-3 text-gray-500">United Kingdom</p>
-              </button>
+            <div class="flex items-center gap-x-5">
+              <template x-if="selected !== 'fr'">
+                <button
+                  @click="selected = 'fr'"
+                  class="flex flex-col items-start space-y-1 rounded-lg py-3 pl-3 pr-[6rem] hover:bg-gray-100"
+                >
+                  <p class="text-xs font-normal leading-3 text-black">Francais</p>
+                  <p class="text-xs font-normal leading-3 text-gray-500">France</p>
+                </button>
+              </template>
+              <template x-if="selected !== 'vi'">
+                <button
+                  @click="selected = 'vi'"
+                  class="flex flex-col items-start space-y-1 rounded-lg py-3 pl-3 pr-[6rem] hover:bg-gray-100"
+                >
+                  <p class="text-xs font-normal leading-3 text-black">Tiếng Việt</p>
+                  <p class="text-xs font-normal leading-3 text-gray-500">Việt Nam</p>
+                </button>
+              </template>
+              <template x-if="selected !== 'en'">
+                <button
+                  @click="selected = 'en'"
+                  class="flex flex-col items-start space-y-1 rounded-lg py-3 pl-3 pr-[6rem] hover:bg-gray-100"
+                >
+                  <p class="text-xs font-normal leading-3 text-black">English</p>
+                  <p class="text-xs font-normal leading-3 text-gray-500">United Kingdom</p>
+                </button>
+              </template>
+            </div>
+          </div>
+
+          <!-- Choose language -->
+          <div x-data="{ activeItem: }" class="flex flex-col space-y-3">
+            <h3 class="text-xl font-medium leading-8 text-black">Choose a language and region</h3>
+            <div class="grid">
+              <article>
+                <button class="flex flex-col items-start space-y-1 rounded-lg py-3 pl-3 pr-[6rem] hover:bg-gray-100">
+                  <p class="text-xs font-normal leading-3 text-black">English</p>
+                  <p class="text-xs font-normal leading-3 text-gray-500">United State</p>
+                </button>
+              </article>
             </div>
           </div>
         </div>
