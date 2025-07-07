@@ -242,7 +242,9 @@
                       class="size-[4rem] rounded-lg bg-blue-50 p-4"
                     />
                     <div>
-                      <p class="text-left text-sm font-medium text-black">Ho Chi Minh City, Vietnam</p>
+                      <p class="text-left text-sm font-medium text-black">
+                        Ho Chi Minh City, Vietnam
+                      </p>
                       <p class="text-sm font-normal text-gray-500">Ho Chi Minh City, Vietnam</p>
                     </div>
                   </a>
@@ -413,81 +415,115 @@
             <li class="relative">
               <button
                 @click="activeDropdown = 'who'"
-                :class="activeDropdown === 'who' ? 'pl-10 py-4 pr-[16rem] bg-white ring-1 ring-gray-100 rounded-full shadow-lg' : 'pl-10 py-4 pr-[6rem] bg-white hover:bg-gray-200 rounded-full'"
+                :class="activeDropdown === 'who' ? 'pl-10 py-4 pr-[6rem] bg-white ring-1 ring-gray-100 rounded-full shadow-lg' : 'pl-10 py-4 pr-[6rem] bg-white hover:bg-gray-200 rounded-full'"
               >
-                <p class="text-left text-xs text-black">Where</p>
-                <p class="text-left text-sm text-gray-500">Search destination</p>
+                <p class="text-left text-xs text-black">Who</p>
+                <p class="text-left text-sm text-gray-500">Add guests</p>
               </button>
               <!-- Dropdown for Who -->
               <div
                 x-show.immediate="activeDropdown === 'who'"
                 x-transition
                 @click.outside="activeDropdown = null"
-                class="absolute left-0 mt-4 flex w-[26rem] flex-col gap-y-2 overflow-y-auto rounded-3xl bg-white p-7 shadow-2xl"
+                class="absolute right-0 mt-4 flex w-[26rem] flex-col gap-y-6 overflow-y-auto rounded-3xl bg-white p-7 shadow-2xl"
               >
-                <p class="text-xs font-normal text-gray-600">Suggested destinations</p>
-                <div class="flex flex-col gap-y-4">
-                  <a href="#" class="flex items-center gap-x-4">
-                    <img
-                      src="./src/assets/icons/map.svg"
-                      alt="This is a map"
-                      class="size-[4rem] rounded-lg bg-blue-50 p-4"
-                    />
-                    <div>
-                      <p class="text-left text-sm font-medium text-black">Nearby</p>
-                      <p class="text-sm font-normal text-gray-500">Find what's around you</p>
-                    </div>
-                  </a>
-                  <a href="#" class="flex items-center gap-x-4">
-                    <img
-                      src="./src/assets/icons/map.svg"
-                      alt="This is a map"
-                      class="size-[4rem] rounded-lg bg-pink-50 p-4"
-                    />
-                    <a href="#">
-                      <p class="text-left text-sm font-medium text-black">
-                        Ho Chi Minh City, Vietnam
-                      </p>
-                      <p class="text-sm font-normal text-gray-500">
-                        For sights like Ben Thanh Market
-                      </p>
-                    </a>
-                  </a>
-                  <a href="#" class="flex items-center gap-x-4">
-                    <img
-                      src="./src/assets/icons/map.svg"
-                      alt="This is a map"
-                      class="size-[4rem] rounded-lg bg-yellow-50 p-4"
-                    />
-                    <div>
-                      <p class="text-left text-sm font-medium text-black">Bangkok, Thailand</p>
-                      <p class="text-sm font-normal text-gray-500">For its bustling nightlife</p>
-                    </div>
-                  </a>
-                  <a href="" class="flex items-center gap-x-4">
-                    <img
-                      src="./src/assets/icons/map.svg"
-                      alt="This is a map"
-                      class="size-[4rem] rounded-lg bg-violet-50 p-4"
-                    />
-                    <div>
-                      <p class="text-left text-sm font-medium text-black">Dalat, Vietnam</p>
-                      <p class="text-sm font-normal text-gray-500">For nature lovers</p>
-                    </div>
-                  </a>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-md text-left font-medium text-black">Adults</p>
+                    <p class="text-left text-sm text-gray-500">Ages 13 or above</p>
+                  </div>
+                  <div x-data="{ adults: 1 }" class="flex items-center gap-x-2">
+                    <button @click="if (adults > 0) adults--" :disabled="adults <= 0">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="size-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        />
+                      </svg>
+                    </button>
+                    <span class="mx-2" x-text="adults"></span>
+                    <button @click="adults++">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="size-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <hr />
+
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-md text-left font-medium text-black">Adults</p>
+                    <p class="text-left text-sm text-gray-500">Ages 13 or above</p>
+                  </div>
+                  <div class="flex items-center gap-x-2">
+                    <button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="size-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        />
+                      </svg>
+                    </button>
+                    <span class="mx-2" x-text="adults"></span>
+                    <button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="size-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             </li>
             <!-- Search icon -->
             <li class="absolute right-2">
-              <button class="p-4 bg-pink-200 rounded-full">
+              <button class="rounded-full bg-rose-600 p-4 hover:bg-rose-500">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6"
+                  class="size-6 text-white"
                 >
                   <path
                     stroke-linecap="round"
